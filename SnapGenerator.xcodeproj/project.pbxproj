@@ -233,6 +233,7 @@
 					"-lopencv_imgcodecs",
 					"-rpath",
 					/Users/Amit/lib/opencv3.4.0,
+					"-lconfig++",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -256,6 +257,7 @@
 					"-lopencv_imgcodecs",
 					"-rpath",
 					/Users/Amit/lib/opencv3.4.0,
+					"-lconfig++",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

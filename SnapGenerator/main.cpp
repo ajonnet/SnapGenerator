@@ -9,20 +9,29 @@
 #include <iostream>
 #include <boost/filesystem.hpp>
 #include <opencv2/opencv.hpp>
+#include <libconfig.h++>
 
 using namespace std;
+using namespace libconfig;
 namespace fs = boost::filesystem;
 
 //Config Params
-const string storagePath = "/Users/Amit/Desktop/SnapGenerator/Storage";
-const string outputPath = "/Users/Amit/Desktop/SnapGenerator/Output";
+string configFPath = "config.cfg";
+string storagePath = "/Users/Amit/Desktop/SnapGenerator/Storage";
+string outputPath = "/Users/Amit/Desktop/SnapGenerator/Output";
 const string camStorePath = "xiaomi_camera_videos/04cf8c70d5de";
 
 //Generates snap File name, by fetching date time info from its path
 string genSnapFName(fs::path vidFilePath);
+void initFromConfigFile();
 
 
 int main(int argc, const char * argv[]) {
+    
+    initFromConfigFile();
+    
+    cout<<"VidStoragePath: "<<storagePath<<endl;
+    cout<<"SnapOutputPath: "<<outputPath<<endl;
 
     //List all Video files at the storage path
     fs::path vidsFilePath = fs::path(storagePath) / fs::path(camStorePath);
@@ -71,7 +80,7 @@ int main(int argc, const char * argv[]) {
         cout<<"Snap Generated: "<<snapFPath.filename()<<endl;
     }
 
-
+    cout<<"Exiting.."<<endl;
     
     return 0;
 }
@@ -81,5 +90,49 @@ string genSnapFName(fs::path vidFilePath) {
     const string snapExt = ".jpg";
     string snapFName =  vidFilePath.parent_path().leaf().string() + "_" + vidFilePath.stem().string() + snapExt;
     return snapFName;
+}
+
+
+void initFromConfigFile() {
+    Config cfg;
+    //initialize config file if not exist
+    if(!fs::exists(configFPath)) {
+        Setting &root = cfg.getRoot();
+        root.add("VidStoragePath", Setting::TypeString);
+        root.add("SnapOutputPath", Setting::TypeString);
+        cfg.writeFile(configFPath.c_str());
+        
+        cout<<"Configuration generated at Path: "<<configFPath<<endl;
+        cout<<"Update the config file and restart the application"<<endl;
+        std::exit(EXIT_SUCCESS);
+
+    }else {
+        
+        //Read Config file and update the params
+        cfg.readFile(configFPath.c_str());
+        Setting &root = cfg.getRoot();
+        string val;
+        root.lookupValue("VidStoragePath", storagePath);
+        root.lookupValue("SnapOutputPath", outputPath);
+        
+        //Validate config values
+        bool validationFailed = false;
+        if(!fs::exists(storagePath)) {
+            cout<<"Invalid VidStoragePath Path"<<endl;
+            validationFailed = true;
+        }
+        
+        if(!fs::exists(outputPath)) {
+            cout<<"Invalid SnapOutputPath Path"<<endl;
+            validationFailed = true;
+        }
+        
+        if(validationFailed) std::exit(EXIT_FAILURE);
+        else {
+            cout<<"Config loaded"<<endl;
+        }
+    }
+    
+
 }
 
