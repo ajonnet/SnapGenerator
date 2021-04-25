@@ -218,6 +218,22 @@
 		282C3D482631D3750092689E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					/Users/Amit/Desktop/opencv34/include,
+					/usr/local/include,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					/Users/Amit/lib/opencv3.4.0/,
+					/usr/local/lib,
+				);
+				OTHER_LDFLAGS = (
+					"-lboost_filesystem",
+					"-lopencv_core",
+					"-lopencv_videoio",
+					"-lopencv_imgcodecs",
+					"-rpath",
+					/Users/Amit/lib/opencv3.4.0,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -225,6 +241,22 @@
 		282C3D492631D3750092689E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					/Users/Amit/Desktop/opencv34/include,
+					/usr/local/include,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					/Users/Amit/lib/opencv3.4.0/,
+					/usr/local/lib,
+				);
+				OTHER_LDFLAGS = (
+					"-lboost_filesystem",
+					"-lopencv_core",
+					"-lopencv_videoio",
+					"-lopencv_imgcodecs",
+					"-rpath",
+					/Users/Amit/lib/opencv3.4.0,
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -248,6 +280,7 @@
 				282C3D492631D3750092689E /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
