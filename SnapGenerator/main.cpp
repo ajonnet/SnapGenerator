@@ -29,9 +29,6 @@ void initFromConfigFile();
 int main(int argc, const char * argv[]) {
     
     initFromConfigFile();
-    
-    cout<<"VidStoragePath: "<<storagePath<<endl;
-    cout<<"SnapOutputPath: "<<outputPath<<endl;
 
     //List all Video files at the storage path
     fs::path vidsFilePath = fs::path(storagePath) / fs::path(camStorePath);
@@ -78,6 +75,8 @@ int main(int argc, const char * argv[]) {
         fs::path snapFPath = fs::path(outputPath) / genSnapFName(vidFile);
         cv::imwrite(snapFPath.string(), snap);
         cout<<"Snap Generated: "<<snapFPath.filename()<<endl;
+        
+        vidSrc.release();
     }
 
     cout<<"Exiting.."<<endl;
@@ -130,6 +129,8 @@ void initFromConfigFile() {
         if(validationFailed) std::exit(EXIT_FAILURE);
         else {
             cout<<"Config loaded"<<endl;
+            cout<<"VidStoragePath: "<<storagePath<<endl;
+            cout<<"SnapOutputPath: "<<outputPath<<endl;
         }
     }
     
