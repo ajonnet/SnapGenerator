@@ -11,6 +11,8 @@
 #include <opencv2/opencv.hpp>
 #include <libconfig.h++>
 
+#define APP_VER "0.1"
+
 using namespace std;
 using namespace libconfig;
 namespace fs = boost::filesystem;
@@ -24,10 +26,12 @@ const string camStorePath = "xiaomi_camera_videos/04cf8c70d5de";
 //Generates snap File name, by fetching date time info from its path
 string genSnapFName(fs::path vidFilePath);
 void initFromConfigFile();
+void processCmdLineArgs(int argc, const char * argv[]);
 
 
 int main(int argc, const char * argv[]) {
     
+    processCmdLineArgs(argc,argv);
     initFromConfigFile();
 
     //List all Video files at the storage path
@@ -138,5 +142,38 @@ void initFromConfigFile() {
     }
     
 
+}
+
+
+void processCmdLineArgs(int argc, const char * argv[]) {
+    const string keys=
+    "{help h  ? |         | show help}"
+    "{version V |         | show build version}"
+    "{configFile c|       | Config File Path}"
+    "{openCvLibVer |      | show opencv Lib Version}"
+    ;
+    
+    cv::CommandLineParser parser(argc, argv, keys);
+    parser.about("SnapGenerator build v" + string(APP_VER));
+    
+    if (parser.has("help")){
+        parser.printMessage();
+        exit(EXIT_SUCCESS);
+    }
+    
+    if(parser.has("version")) {
+        cout<<"SnapGenerator build v"<<APP_VER<<endl;
+        exit(EXIT_SUCCESS);
+    }
+    
+    if(parser.has("openCvLibVer")) {
+        cout<<"OpenCV Ver: "<<CV_VERSION<<endl;
+        exit(EXIT_SUCCESS);
+    }
+    
+    if(parser.has("configFile")) {
+        configFPath = parser.get<string>("configFile");
+        cout<<"Using config file at path: "<<configFPath<<endl;
+    }
 }
 
