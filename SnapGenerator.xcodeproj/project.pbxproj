@@ -234,6 +234,7 @@
 					"-rpath",
 					/Users/Amit/lib/opencv3.4.0,
 					"-lconfig++",
+					"-lopencv_imgproc",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -258,6 +259,7 @@
 					"-rpath",
 					/Users/Amit/lib/opencv3.4.0,
 					"-lconfig++",
+					"-lopencv_imgproc",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

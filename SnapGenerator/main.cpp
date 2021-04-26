@@ -71,6 +71,9 @@ int main(int argc, const char * argv[]) {
         vidSrc>>snap;
         assert(snap.empty() == false);
         
+        //Optimize the snap for storage
+        cv::resize(snap, snap, cvSize(0, 0),0.5,0.5);
+        
         //Store Snap with appropriate filename in the output path
         fs::path snapFPath = fs::path(outputPath) / genSnapFName(vidFile);
         cv::imwrite(snapFPath.string(), snap);
