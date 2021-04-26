@@ -25,6 +25,7 @@
 /* Begin PBXFileReference section */
 		282C3D402631D3750092689E /* SnapGenerator */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SnapGenerator; sourceTree = BUILT_PRODUCTS_DIR; };
 		282C3D432631D3750092689E /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
+		282C3D4C2636C46A0092689E /* readme.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = readme.txt; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -41,6 +42,7 @@
 		282C3D372631D3750092689E = {
 			isa = PBXGroup;
 			children = (
+				282C3D4C2636C46A0092689E /* readme.txt */,
 				282C3D422631D3750092689E /* SnapGenerator */,
 				282C3D412631D3750092689E /* Products */,
 			);
